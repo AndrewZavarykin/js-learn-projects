@@ -10,7 +10,11 @@
  * Помимо поддержки собственных свойств, объект так же наследует свойства объекта,
  * который является его прототипом.
  * 
- * Свойство объекта имеет имя и значение. Именем свойства может быть любая строка или символ,
+ * Прототип - это ссылка на объект "родитель", который так же владеет своими свойствами и прототипом.
+ * Если у объекта нет свойства с указанным именем, JS автоматически ищет его в прототипе и так далее 
+ * по цепочке, пока не дойдет до Object.prototype (делее будет null)
+ * 
+ * Свойство объекта имеет имя и значение. Именем свойства может быть любая строка или Symbol,
  * значением свойства может быть любое значение (включая другие объекты и функции).
  * 
  * В дополнение к имени и значению каждое свойство имеет три атрибута свойства:
@@ -19,7 +23,7 @@
  *  - configurable - если true свойство можно удалить или изменить его атрибуты.
  */
 
-// создание объекта с помощью объектного литерала
+console.log("===== Создание объектов с помощью объектного литерала =====")
 const empty = {};
 const point = {x: 0, y: 1};
 const point2 = {x: point.x, y: point.y};
@@ -32,31 +36,71 @@ const book = {
         lastName: "Flanagan"
     }
 }
+console.log("empty: ", empty);
+console.log("point: ", point);
+console.log("point2: ", point2);
+console.log("book:", book);
 
-// создание объекта с помощью операции new Object() (через конструктор)
-const o = new Object();
-const a = new Array();
-const d = new Date();
-const m = new Map();
+console.log("===== Создание объектов с помощью конструктора =====")
+const object = new Object();
+const array = new Array();
+const date = new Date();
+const map = new Map();
+console.log("object:", object);
+console.log("array:", array);
+console.log("date:", date);
+console.log("map:", map);
 
-// создание объекта с помощью функци Object.create().
+console.log("===== Прототипы =====")
+console.log(object.__proto__);
+console.log(array.__proto__);
+console.log(date.__proto__);
+console.log(map.__proto__);
+
+function Person(name, age) { // создаем конструктор объекта Person
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.sayHello = function() { // добавляем метод sayHello в прототип Person
+    console.log(`Hello, my name is ${this.name}`)
+}
+
+Person.prototype.sayAge = function() { // добавляем метод sayAge в прототип Person
+    console.log(`I am ${this.age} years old`);
+}
+
+const alice = new Person("Alice", 18);
+const bob = new Person("Bob", 20);
+
+alice.sayHello(); // вызов метода sayHello
+alice.sayAge();
+bob.sayHello();
+bob.sayAge();
+
+console.log("===== Создание объектов с помощью функции Object.create() =====")
 // Первый аргумент функции используется для прототипирования нового объекта.
 // Второй (необязательный) аргумент описывает свойства нового объекта.
 const obj1 = Object.create(null);
 const obj2 = Object.create({x: 0, y:1});
 const obj3 = Object.create(Object.prototype); // подобен объекту {} или new Object()
+console.log("объект без прототипа:", obj1);
+console.log("объект с переданным прототипом:", obj2);
+console.log("объект с базовым прототипом Object.prototype:", obj3);
 
-
-// создание объекта с помощью функции Object.assign
+console.log("===== Расширение объектов =====")
 const source = { a: 1, b:2 };
-const copy = Object.assign({c: 3}, source); // копирует свойства объекта source в новый объект copy + добавляет новое значение c
-console.log(copy);
+const target = {c: 3};
+Object.assign(target, source); // расширяет объект target, добавляя в него собственные свойства объекта source
+console.log(target);
 
-// получение и установка свойств объекта
-const author = book.author;
-const name = author.firstName;
-const title = book["main title"];
+console.log("===== Запашивание и установка свойста объекта =====")
+// Запашивание свойства
+ console.log("book author: ", book.author);
+console.log("author name: ", book.author.firstName);
+console.log("book title: ", book["main title"]);
 book.edition = 7; // добавление нового свойства в объект
+console.log("book edition: ", book.edition);
 
 // если запрашиваемое свойство отсутствует у объекта, оно будет запрашиваться далее по цепочке объектов прототипов.
 // если свойство не найдено, вернется undefined; 
