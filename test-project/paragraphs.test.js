@@ -5,7 +5,7 @@ describe("paragraphs test", () => {
     initApp();
 
     test("scriptShouldRenderDivContainerWithClassContainer", () => {
-        expect(document.querySelector(".container")).notBeNull;
+        expect(document.querySelector(".container")).not.toBeNull();
     })
 
     test("divContainerShouldHaveThreeParagraphsWithClassParItem", () => {
@@ -20,7 +20,7 @@ describe("paragraphs test", () => {
 
     test("scriptShouldRenderInputWithIdAndClassInputAndTypeText", () => {
         const input = document.querySelector(".input");
-        expect(input).notBeNull;
+        expect(input).not.toBeNull();
         expect(input.type).toBe("text");
         expect(input.id).toBe("input");
         expect(input.className).toBe("input");
@@ -28,7 +28,7 @@ describe("paragraphs test", () => {
 
     test("scriptShouldRenderButtonWithClassButtonAndTextAddParagraphAndHiddenTrue", () => {
         const button = document.querySelector(".button");
-        expect(button).notBeNull;
+        expect(button).not.toBeNull();
         expect(button.textContent).toBe("Add paragraph");
         expect(button.hidden).toBeTruthy();
 
