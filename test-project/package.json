@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.js": "eslint . --fix"
+  "*.js": "eslint --cache --fix"
   },
   "keywords": [],
   "author": "a.zavarykin",
