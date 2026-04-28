@@ -36,4 +36,9 @@ Git:
 
 `git push` - отправка изменений на сервер Git
 
+Пакеты:
+
+`npm install --save-dev husky lint-staged` - установка прекоммит хука
+
+`npx husky init` - инициализация Husky
 
