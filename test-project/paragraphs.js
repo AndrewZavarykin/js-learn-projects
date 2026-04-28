@@ -97,7 +97,5 @@ export function initApp() {
     setEventListenerOnButton();
 };
 
-//toto
-
 initApp();
 
