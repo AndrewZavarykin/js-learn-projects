@@ -9,13 +9,13 @@ function initTimer() {
 }
 
 function updateTimer() {
-    intervalId = setInterval(() => { initTimer() }, 1000);
+    intervalId = setInterval(() => initTimer(), 1000);
 }
 
 function runApp() {
     initTimer();
     updateTimer();
-    setTimeout(() => { clearInterval(intervalId) }, 5000);
+    setTimeout(() => clearInterval(intervalId), 5000);
 }
 
 runApp();
